@@ -50,6 +50,17 @@ x <- table(BrData$AgeCat)
 x
 round(prop.table(x),4)*100
 
+#Division
+BrData$Division <- factor(BrData$Division)
+
+BrData$AgeCat <- factor(BrData$AgeCat,levels=c("Barisal",2,3,4),labels = c('<40','40-49','50-59','>=60'))
+BrData$AgeCat
+
+summary(BrData$AgeCat)
+x <- table(BrData$AgeCat)
+x
+round(prop.table(x),4)*100
+
 #6.	Current place of residence (Home District)
 # BrData$Home_district <- factor(BrData$X4..Home.District..permanent.residence.)
 # 
@@ -148,13 +159,13 @@ BrData$Hist_br <- factor(BrData$X6..Family.history.of.breast.cancer)
 
 #When did you first realize that you haveproblem with your breast? 
 BrData$problem_identify_br <- factor(BrData$X1.3.1.When.did.you.first.realize.that.you.problem.with.your.breast.)
-BrData$SymptomptoDay
-
-
-summary(BrData$symptom_Lump_br)
-x <- table(BrData$symptom_Lump_br)
-x
-round(prop.table(x),4)*100
+# BrData$SymptomptoDay
+# 
+# 
+# summary(BrData$symptom_Lump_br)
+# x <- table(BrData$symptom_Lump_br)
+# x
+# round(prop.table(x),4)*100
 
 
 #Lump
@@ -280,53 +291,195 @@ round(prop.table(x),4)*100
 
 #2.3 Once you realized your problem when did you go to doctor:________(in days) 
 BrData$doctorVisit_days <- BrData$X2.3.Once.you.realized.your.problem.when.did.you.go.to.doctor.________.in.days.
-BrData$doctorVisit_months <-round(BrData$X2.3.Once.you.realized.your.problem.when.did.you.go.to.doctor.________.in.days./30)
+BrData$PtD <- factor(BrData$PtD,levels=c("Yes","No"),labels = c("Yes","No"))
 
-BrData$patient_delay[BrData$doctorVisit_months <= 3]  = "No"
-BrData$patient_delay[BrData$doctorVisit_months > 3] = "Yes"
-BrData$patient_delay <- factor(BrData$patient_delay)
-
-summary(BrData$patient_delay)
-x <- table(BrData$patient_delay)
+summary(BrData$PtD)
+x <- table(BrData$PtD)
 x
 round(prop.table(x),4)*100
 
-#2.6 Emotional barriers: Why did not seek attention sooner? Please respond for each of the queries (Yes/No)  
-BrData$disappearItself <- factor(BrData$a..Because.you.thought.that.the.problem.would.disappear.by.itself.)
+
+c <- table(BrData$AgeCat ,BrData$PtD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+c <- table(BrData$residence ,BrData$PtD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+c <- table(BrData$Marital_status ,BrData$PtD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+c <- table(BrData$Patients_education ,BrData$PtD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+c <- table(BrData$Husbands_education ,BrData$PtD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+c <- table(BrData$Family_income ,BrData$PtD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+c <- table(BrData$Division ,BrData$PtD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+
+
+#Provider_Delay
+BrData$PrD <- factor(BrData$PrD,levels=c("Yes","No"),labels = c("Yes","No"))
+BrData$PrD
+summary(BrData$PrD)
+x <- table(BrData$PrD)
+x
+round(prop.table(x),4)*100
+
+#Total_Delay
+BrData$TD <- factor(BrData$TD,levels=c("Yes","No"),labels = c("Yes","No"))
+BrData$TD
+summary(BrData$TD)
+x <- table(BrData$TD)
+x
+round(prop.table(x),4)*100
 
 #Why did not seek attention sooner? Please respond for each of the queries (Yes/No)
 #2.6 Emotional barriers: a.	Because you thought that the problem would disappear by itself? Yes/No 
 BrData$Emotional_barriers_disappearItself <- factor(BrData$a..Because.you.thought.that.the.problem.would.disappear.by.itself.)
+summary(BrData$Emotional_barriers_disappearItself)
+BrData$Emotional_barriers_disappearItself <- factor(BrData$Emotional_barriers_disappearItself,levels=c("No","Yes"),labels = c("No","Yes"))
+summary(BrData$Emotional_barriers_disappearItself)
+
+x <- table(BrData$Emotional_barriers_disappearItself)
+x
+round(prop.table(x),4)*100
+
+c <- table(BrData$AgeCat ,BrData$Emotional_barriers_disappearItself)
+c
+round(prop.table(c,2)*100,2)
+summary(c)
+
+c <- table(BrData$residence ,BrData$Emotional_barriers_disappearItself)
+c
+round(prop.table(c,2)*100,2)
+summary(c)
+
+c <- table(BrData$Marital_status ,BrData$Emotional_barriers_disappearItself)
+c
+round(prop.table(c,2)*100,2)
+summary(c)
 
 #2.6 Emotional barriers: b.	Fear/ too scared?(Yes/No)
 BrData$Emotional_barriers_scared <- factor(BrData$b..Fear..too.scared.)
+summary(BrData$Emotional_barriers_scared)
+BrData$Emotional_barriers_scared <- factor(BrData$Emotional_barriers_scared,levels=c("No","Yes"),labels = c("No","Yes"))
+summary(BrData$Emotional_barriers_scared)
+
+x <- table(BrData$Emotional_barriers_scared)
+x
+round(prop.table(x),4)*100
+
 
 #2.6 Emotional barriers: c.	Too embarrassed(Yes/No)
 BrData$Emotional_barriers_embarrassed <- factor(BrData$c..Too.embarrassed.)
+summary(BrData$Emotional_barriers_embarrassed)
+BrData$Emotional_barriers_embarrassed <- factor(BrData$Emotional_barriers_embarrassed,levels=c("No","Yes"),labels = c("No","Yes"))
+summary(BrData$Emotional_barriers_embarrassed)
+
+x <- table(BrData$Emotional_barriers_embarrassed)
+x
+round(prop.table(x),4)*100
 
 #2.6 Emotional barriers: d.	Negligence or carelessness?(Yes/No)
 BrData$Emotional_barriers_negligence <- factor(BrData$d..Negligence.or.carelessness.)
+summary(BrData$Emotional_barriers_negligence)
+BrData$Emotional_barriers_negligence <- factor(BrData$Emotional_barriers_negligence,levels=c("No","Yes"),labels = c("No","Yes"))
+summary(BrData$Emotional_barriers_negligence)
+
+x <- table(BrData$Emotional_barriers_negligence)
+x
+round(prop.table(x),4)*100
 
 #2.6 Practical barriers: e.	h.	Because I had to take care of the family (children, elderly or sick)?(Yes/No)
 BrData$Practical_barriers_Carefamily <- factor(BrData$e..Because.I.had.to.take.care.of.the.family..children..elderly.or.sick..)
+summary(BrData$Practical_barriers_Carefamily)
+BrData$Practical_barriers_Carefamily <- factor(BrData$Practical_barriers_Carefamily,levels=c("No","Yes"),labels = c("No","Yes"))
+summary(BrData$Practical_barriers_Carefamily)
+
+x <- table(BrData$Practical_barriers_Carefamily)
+x
+round(prop.table(x),4)*100
+
 
 #2.6 Practical barriers: g.	Too busy?(Yes/No)
 BrData$Practical_barriers_toobusy <- factor(BrData$f..Too.busy.)
+summary(BrData$Practical_barriers_toobusy)
+BrData$Practical_barriers_toobusy <- factor(BrData$Practical_barriers_toobusy,levels=c("No","Yes"),labels = c("No","Yes"))
+summary(BrData$Practical_barriers_toobusy)
+
+x <- table(BrData$Practical_barriers_toobusy)
+x
+round(prop.table(x),4)*100
+
 
 #2.6 Practical barriers: f.	Lack of money to use health services? (Yes/No)
 BrData$Practical_barriers_lackMoney <- factor(BrData$g..Lack.of.money.to.use.health.services.)
+summary(BrData$Practical_barriers_lackMoney)
+BrData$Practical_barriers_lackMoney <- factor(BrData$Practical_barriers_lackMoney,levels=c("No","Yes"),labels = c("No","Yes"))
+summary(BrData$Practical_barriers_lackMoney)
+
+x <- table(BrData$Practical_barriers_lackMoney)
+x
+round(prop.table(x),4)*100
 
 #2.6 Health-Service barriers: k.	Difficult to arrange transport?(Yes/No)
 BrData$Practical_barriers_transportDifficulties <- factor(BrData$h..Difficult.to.arrange.transport.)
+summary(BrData$Practical_barriers_transportDifficulties)
+BrData$Practical_barriers_transportDifficulties <- factor(BrData$Practical_barriers_transportDifficulties,levels=c("No","Yes"),labels = c("No","Yes"))
+summary(BrData$Practical_barriers_transportDifficulties)
+
+x <- table(BrData$Practical_barriers_transportDifficulties)
+x
+round(prop.table(x),4)*100
 
 #2.6 Health-Service barriers: i.	Because I did not know where should I go?
 BrData$Practical_barriers_wheretoGo <- factor(BrData$i..Because.I.did.not.know.where.should.I.go)
+summary(BrData$Practical_barriers_wheretoGo)
+BrData$Practical_barriers_wheretoGo <- factor(BrData$Practical_barriers_wheretoGo,levels=c("No","Yes"),labels = c("No","Yes"))
+summary(BrData$Practical_barriers_wheretoGo)
+
+x <- table(BrData$Practical_barriers_wheretoGo)
+x
+round(prop.table(x),4)*100
 
 #2.6 Health-Service barriers: j.	Difficult to make appointment?(Yes/No)
 BrData$Practical_barriers_appoinmentDifficulties <- factor(BrData$j..Difficult.to.make.appointment.)
+summary(BrData$Practical_barriers_appoinmentDifficulties)
+BrData$Practical_barriers_appoinmentDifficulties <- factor(BrData$Practical_barriers_appoinmentDifficulties,levels=c("No","Yes"),labels = c("No","Yes"))
+summary(BrData$Practical_barriers_appoinmentDifficulties)
+
+x <- table(BrData$Practical_barriers_appoinmentDifficulties)
+x
+round(prop.table(x),4)*100
 
 #2.6 Health-Service barriers: l.	For some other reason? _____________
 BrData$barriers_others <- factor(BrData$K..For.some.other.reason.)
+summary(BrData$barriers_others)
+BrData$barriers_others <- factor(BrData$barriers_others,levels=c("No","Yes"),labels = c("No","Yes"))
+summary(BrData$barriers_others)
+
+x <- table(BrData$barriers_others)
+x
+round(prop.table(x),4)*100
 
 #2.6 Health-Service barriers: l.	For some other reason? specify
 BrData$barriers_othersSpecify <- factor(BrData$If.other..please.specify)
@@ -339,19 +492,16 @@ BrData$treatmentCenter_other <- factor(BrData$If.other..please.specify.1)
 
 #3.1 Do you remember the date when you first visited a medical center? 
 BrData$treatmentCenter_visitDate <- BrData$X3.2.Do.you.remember.the.date.when.you.first.visited.a.medical.center..Enter.the.date.
-BrData$MedtoTest_months <- round(BrData$MedtoTest/30)
-
-BrData$provider_delay[BrData$MedtoTest_months <= 1]  = "No"
-BrData$provider_delay[BrData$MedtoTest_months > 1] = "Yes"
-BrData$provider_delay <- factor(BrData$provider_delay)
-
-summary(BrData$provider_delay)
-x <- table(BrData$provider_delay)
-x
-round(prop.table(x),4)*100
 
 #3.2 Have you tried to treat at home or taken alternative remedy for this problem? Yes/No
 BrData$treatmenthome_alternativeRemedy <- factor(BrData$X3.3.Have.you.tried.to.treat.at.home.or.taken.alternative.remedy.for.this.problem.)
+summary(BrData$treatmenthome_alternativeRemedy)
+BrData$treatmenthome_alternativeRemedy <- factor(BrData$treatmenthome_alternativeRemedy,levels=c("No","Yes"),labels = c("No","Yes"))
+summary(BrData$treatmenthome_alternativeRemedy)
+
+x <- table(BrData$treatmenthome_alternativeRemedy)
+x
+round(prop.table(x),4)*100
 
 #3.2 Have you tried to treat at home or taken alternative remedy for this problem? Yes/No
 BrData$treatmenthome_alternativeRemedy_specify <- factor(BrData$X3.3.1.if.yes..which.one...)
