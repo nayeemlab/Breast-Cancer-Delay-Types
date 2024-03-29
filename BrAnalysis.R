@@ -53,11 +53,12 @@ round(prop.table(x),4)*100
 #Division
 BrData$Division <- factor(BrData$Division)
 
-BrData$AgeCat <- factor(BrData$AgeCat,levels=c("Barisal",2,3,4),labels = c('<40','40-49','50-59','>=60'))
-BrData$AgeCat
+BrData$Division_cat <- factor(BrData$Division,levels=c("Barisal","Chittagong","Dhaka","Khulna","Mymensingh","Rajshahi","Rangpur","Sylhet"),
+                        labels = c("Barisal","Chittagong","Dhaka","Khulna","Mymensingh","Rajshahi","Rangpur","Sylhet"))
+BrData$Division_cat
 
-summary(BrData$AgeCat)
-x <- table(BrData$AgeCat)
+summary(BrData$Division_cat)
+x <- table(BrData$Division_cat)
 x
 round(prop.table(x),4)*100
 
@@ -126,6 +127,22 @@ round(prop.table(x),4)*100
 #Monthly.income.Others
 BrData$Others_income <- factor(BrData$Monthly.income.Others)
 
+summary(BrData$PortableElectronicDevices)
+BrData$PortableElectronicDevices <- factor(BrData$PortableElectronicDevices,levels=c("Unchecked","Checked"),labels = c("Unchecked","Checked"))
+summary(BrData$PortableElectronicDevices)
+
+x <- table(BrData$PortableElectronicDevices)
+x
+round(prop.table(x),4)*100
+
+summary(BrData$MassMediaAccess)
+BrData$MassMediaAccess <- factor(BrData$MassMediaAccess,levels=c("Unchecked","Checked"),labels = c("Unchecked","Checked"))
+summary(BrData$MassMediaAccess)
+
+x <- table(BrData$MassMediaAccess)
+x
+round(prop.table(x),4)*100
+
 #Social Media
 BrData$social_media_access <- factor(BrData$X5..Access.to.communication.and.media..choice.Social.media.)
 
@@ -153,9 +170,6 @@ summary(BrData$Hist_br)
 x <- table(BrData$Hist_br)
 x
 round(prop.table(x),4)*100
-
-#13.	Family history of breast cancer: yes/no
-BrData$Hist_br <- factor(BrData$X6..Family.history.of.breast.cancer)
 
 #When did you first realize that you haveproblem with your breast? 
 BrData$problem_identify_br <- factor(BrData$X1.3.1.When.did.you.first.realize.that.you.problem.with.your.breast.)
@@ -226,6 +240,8 @@ BrData$symptom_cancer_br <- factor(BrData$X2.1.When.you.noticed.symptom.for.the.
 #2.4 Have you experienced following discomfort? 
 #a.	Lump in the armpit, neck or trunk? Yes/No 
 BrData$discomfort_Lump_br <- factor(BrData$Lump.in.the.armpit..neck.or.trunk.)
+BrData$discomfort_Lump_br <- factor(BrData$discomfort_Lump_br,levels=c("No","Yes"),labels = c("No","Yes"))
+summary(BrData$discomfort_Lump_br)
 
 summary(BrData$discomfort_Lump_br)
 x <- table(BrData$discomfort_Lump_br)
@@ -235,6 +251,8 @@ round(prop.table(x),4)*100
 
 #b.	Pain in breast  (Yes/No)
 BrData$discomfort_breastPain_br <- factor(BrData$Pain.in.breast)
+BrData$discomfort_breastPain_br <- factor(BrData$discomfort_breastPain_br,levels=c("No","Yes"),labels = c("No","Yes"))
+summary(BrData$discomfort_breastPain_br)
 
 summary(BrData$discomfort_breastPain_br)
 x <- table(BrData$discomfort_breastPain_br)
@@ -243,6 +261,8 @@ round(prop.table(x),4)*100
 
 #c.	Pain in arm on the same side as the affected? (Yes/No)
 BrData$discomfort_armPain_br <- factor(BrData$Pain.in.arm.on.the.same.side.as.the.affected.)
+BrData$discomfort_armPain_br <- factor(BrData$discomfort_armPain_br,levels=c("No","Yes"),labels = c("No","Yes"))
+summary(BrData$discomfort_armPain_br)
 
 summary(BrData$discomfort_armPain_br)
 x <- table(BrData$discomfort_armPain_br)
@@ -251,6 +271,8 @@ round(prop.table(x),4)*100
 
 #d.	Color changes in the breast skin (like red, brown or purple)? (Yes/No)
 BrData$discomfort_skinColor_br <- factor(BrData$Color.changes.in.the.breast.skin..like.red..brown.or.purple..)
+BrData$discomfort_skinColor_br <- factor(BrData$discomfort_skinColor_br,levels=c("No","Yes"),labels = c("No","Yes"))
+summary(BrData$discomfort_skinColor_br)
 
 summary(BrData$discomfort_skinColor_br)
 x <- table(BrData$discomfort_skinColor_br)
@@ -259,6 +281,8 @@ round(prop.table(x),4)*100
 
 #e.	Ulcer or sore on the skin of the breast? (Yes/No)
 BrData$discomfort_skinUlcer_br <- factor(BrData$Ulcer.or.sore.on.the.skin.of.the.breast.)
+BrData$discomfort_skinUlcer_br <- factor(BrData$discomfort_skinUlcer_br,levels=c("No","Yes"),labels = c("No","Yes"))
+summary(BrData$discomfort_skinUlcer_br)
 
 summary(BrData$discomfort_skinUlcer_br)
 x <- table(BrData$discomfort_skinUlcer_br)
@@ -267,6 +291,8 @@ round(prop.table(x),4)*100
 
 #f.	Itching in the breast?(Yes/No)
 BrData$discomfort_Itching_br <- factor(BrData$Itching.in.the.breast.)
+BrData$discomfort_Itching_br <- factor(BrData$discomfort_Itching_br,levels=c("No","Yes"),labels = c("No","Yes"))
+summary(BrData$discomfort_Itching_br)
 
 summary(BrData$discomfort_Itching_br)
 x <- table(BrData$discomfort_Itching_br)
@@ -275,6 +301,8 @@ round(prop.table(x),4)*100
 
 #g.	Changes in breast shape?(Yes/No)
 BrData$discomfort_shape_br <- factor(BrData$Changes.in.breast.shape.)
+BrData$discomfort_shape_br <- factor(BrData$discomfort_shape_br,levels=c("No","Yes"),labels = c("No","Yes"))
+summary(BrData$discomfort_shape_br)
 
 summary(BrData$discomfort_shape_br)
 x <- table(BrData$discomfort_shape_br)
@@ -283,6 +311,8 @@ round(prop.table(x),4)*100
 
 #h.	Liquid or blood came out from the nipple?(Yes/No)
 BrData$discomfort_liquidBlood_br <- factor(BrData$Liquid.or.blood.came.out.from.the.nipple.)
+BrData$discomfort_liquidBlood_br <- factor(BrData$discomfort_liquidBlood_br,levels=c("No","Yes"),labels = c("No","Yes"))
+summary(BrData$discomfort_liquidBlood_br)
 
 summary(BrData$discomfort_liquidBlood_br)
 x <- table(BrData$discomfort_liquidBlood_br)
@@ -304,37 +334,236 @@ c
 round(prop.table(c,1)*100,2)
 summary(c)
 
+model <- glm(relevel(factor(BrData$PtD), ref = "No")~ relevel(factor(BrData$AgeCat), ref = ">=60"),
+              family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+
+c <- table(BrData$Division_cat ,BrData$PtD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$PtD), ref = "No")~ relevel(factor(BrData$Division_cat), ref = "Barisal"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
 c <- table(BrData$residence ,BrData$PtD)
 c
 round(prop.table(c,1)*100,2)
 summary(c)
+
+model <- glm(relevel(factor(BrData$PtD), ref = "No")~ relevel(factor(BrData$residence), ref = "Urban"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
 
 c <- table(BrData$Marital_status ,BrData$PtD)
 c
 round(prop.table(c,1)*100,2)
 summary(c)
 
+model <- glm(relevel(factor(BrData$PtD), ref = "No")~ relevel(factor(BrData$Marital_status), ref = "Married"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
 c <- table(BrData$Patients_education ,BrData$PtD)
 c
 round(prop.table(c,1)*100,2)
 summary(c)
+
+model <- glm(relevel(factor(BrData$PtD), ref = "No")~ relevel(factor(BrData$Patients_education), ref = "Secondary/higher"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
 
 c <- table(BrData$Husbands_education ,BrData$PtD)
 c
 round(prop.table(c,1)*100,2)
 summary(c)
 
+model <- glm(relevel(factor(BrData$PtD), ref = "No")~ relevel(factor(BrData$Husbands_education), ref = "Secondary/higher"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
 c <- table(BrData$Family_income ,BrData$PtD)
 c
 round(prop.table(c,1)*100,2)
 summary(c)
 
-c <- table(BrData$Division ,BrData$PtD)
+model <- glm(relevel(factor(BrData$PtD), ref = "No")~ relevel(factor(BrData$Family_income), ref = ">20,000"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+c <- table(BrData$PortableElectronicDevices ,BrData$PtD)
 c
 round(prop.table(c,1)*100,2)
 summary(c)
 
+model <- glm(relevel(factor(BrData$PtD), ref = "No")~ relevel(factor(BrData$PortableElectronicDevices), ref = "Unchecked"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
 
+c <- table(BrData$MassMediaAccess ,BrData$PtD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$PtD), ref = "No")~ relevel(factor(BrData$MassMediaAccess), ref = "Unchecked"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+c <- table(BrData$symptom_Lump_br ,BrData$PtD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$PtD), ref = "No")~ relevel(factor(BrData$symptom_Lump_br), ref = "Unchecked"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+
+c <- table(BrData$symptom_breastPain_br ,BrData$PtD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$PtD), ref = "No")~ relevel(factor(BrData$symptom_breastPain_br), ref = "Unchecked"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+c <- table(BrData$symptom_nippleDischarge_br ,BrData$PtD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$PtD), ref = "No")~ relevel(factor(BrData$symptom_nippleDischarge_br), ref = "Unchecked"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+c <- table(BrData$symptom_SkinChanges_br ,BrData$PtD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$PtD), ref = "No")~ relevel(factor(BrData$symptom_SkinChanges_br), ref = "Unchecked"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+c <- table(BrData$symptom_BonePain_br ,BrData$PtD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$PtD), ref = "No")~ relevel(factor(BrData$symptom_BonePain_br), ref = "Unchecked"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+c <- table(BrData$KP_checkBreast ,BrData$PtD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$PtD), ref = "No")~ relevel(factor(BrData$KP_checkBreast), ref = "No"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+c <- table(BrData$Hist_br ,BrData$PtD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$PtD), ref = "No")~ relevel(factor(BrData$Hist_br), ref = "No"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+#adjusted model
+model <- glm(relevel(factor(BrData$PtD), ref = "No")~ relevel(factor(BrData$Patients_education), ref = "Secondary/higher")
+             + relevel(factor(BrData$Family_income), ref = ">20,000")
+             +relevel(factor(BrData$PortableElectronicDevices), ref = "Unchecked")
+             +relevel(factor(BrData$MassMediaAccess), ref = "Unchecked")
+             +relevel(factor(BrData$symptom_breastPain_br), ref = "Unchecked"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+
+require(foreign)
+require(MASS)
+require(pROC)
+require(survey)
+require(ResourceSelection)
+require(ROCR)
+require(car)
+require(ggplot2)
+require(maptools)
+
+#hoslem
+hoslem.test(model$y, fitted(model)) #hosmer and lemeshow goodness of fit  test
+
+#auc value
+# 
+# prob <- predict(model,type="response")
+# pred <- prediction(as.numeric(prob),as.numeric(model$y))
+# perf <- performance(pred, measure = "tpr", x.measure = "fpr") 
+# auc.tmp <- performance(pred,"auc"); auc <- as.numeric(auc.tmp@y.values)
+# auc
+
+library("verification")
+
+# For model without ties
+roc.area(model$y, fitted(model))
+ci.auc(model$y, fitted(model))
+
+#roc curve
+
+# plot(perf, main="ROC Curve ", xlab="specificity",  ylab="sensitivity")
+# grid()
+# abline(0,1, col="blue", lty=2)
+
+D.ex <- model$y
+M.ex <- fitted(model)
+mu1 <- mean(M.ex[D.ex == 1])
+mu0 <- mean(M.ex[D.ex == 0])
+s1 <- sd(M.ex[D.ex == 1])
+s0 <- sd(M.ex[D.ex == 0])
+c.ex <- seq(min(M.ex), max(M.ex), length.out = 300)
+
+binorm.roc <- data.frame(c = c.ex, 
+                         FPF = pnorm((mu0 - c.ex)/s0), 
+                         TPF = pnorm((mu1 - c.ex)/s1)
+)
+library(survivalROC)
+library(plotROC)
+binorm.plot1 <- ggplot(binorm.roc, aes(x = FPF, y = TPF, label = c)) + 
+  geom_roc(stat = "identity") +  
+  ggtitle("ROC Curves (Model 1)") + 
+  annotate("text", x = .75, y = .50, 
+           label = paste("AUC =", round(calc_auc(binorm.plot)$AUC*(-1)*100, 2),"%")) +
+#  scale_x_continuous("False positive fraction (1 - Specificity)", breaks = seq(0, 1, by = .1))+
+#  scale_y_continuous("True positive fraction (Sensitivity)", breaks = seq(0, 1, by = .1)) 
+  style_roc(theme = theme_grey, xlab = "False positive fraction (1 - Specificity)", ylab = "True positive fraction (Sensitivity)")
+binorm.plot1 <- binorm.plot1 + 
+  theme(plot.title = element_text(size = 16,hjust=0.5),
+                  legend.title = element_text(size=16),
+                  legend.text = element_text(size=16),
+                  axis.text = element_text(size = 16),
+                  axis.title = element_text(size = 16))
+binorm.plot1
 
 #Provider_Delay
 BrData$PrD <- factor(BrData$PrD,levels=c("Yes","No"),labels = c("Yes","No"))
@@ -344,6 +573,243 @@ x <- table(BrData$PrD)
 x
 round(prop.table(x),4)*100
 
+
+c <- table(BrData$AgeCat ,BrData$PrD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$PrD), ref = "No")~ relevel(factor(BrData$AgeCat), ref = ">=60"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+
+c <- table(BrData$Division_cat ,BrData$PrD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$PrD), ref = "No")~ relevel(factor(BrData$Division_cat), ref = "Barisal"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+c <- table(BrData$residence ,BrData$PrD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$PrD), ref = "No")~ relevel(factor(BrData$residence), ref = "Urban"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+c <- table(BrData$Marital_status ,BrData$PrD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$PrD), ref = "No")~ relevel(factor(BrData$Marital_status), ref = "Married"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+c <- table(BrData$Patients_education ,BrData$PrD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$PrD), ref = "No")~ relevel(factor(BrData$Patients_education), ref = "Secondary/higher"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+c <- table(BrData$Husbands_education ,BrData$PrD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$PrD), ref = "No")~ relevel(factor(BrData$Husbands_education), ref = "Secondary/higher"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+c <- table(BrData$Family_income ,BrData$PrD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$PrD), ref = "No")~ relevel(factor(BrData$Family_income), ref = ">20,000"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+c <- table(BrData$PortableElectronicDevices ,BrData$PrD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$PrD), ref = "No")~ relevel(factor(BrData$PortableElectronicDevices), ref = "Unchecked"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+c <- table(BrData$MassMediaAccess ,BrData$PrD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$PrD), ref = "No")~ relevel(factor(BrData$MassMediaAccess), ref = "Unchecked"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+c <- table(BrData$symptom_Lump_br ,BrData$PrD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$PrD), ref = "No")~ relevel(factor(BrData$symptom_Lump_br), ref = "Unchecked"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+
+c <- table(BrData$symptom_breastPain_br ,BrData$PrD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$PrD), ref = "No")~ relevel(factor(BrData$symptom_breastPain_br), ref = "Unchecked"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+c <- table(BrData$symptom_nippleDischarge_br ,BrData$PrD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$PrD), ref = "No")~ relevel(factor(BrData$symptom_nippleDischarge_br), ref = "Unchecked"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+c <- table(BrData$symptom_SkinChanges_br ,BrData$PrD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$PrD), ref = "No")~ relevel(factor(BrData$symptom_SkinChanges_br), ref = "Unchecked"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+c <- table(BrData$symptom_BonePain_br ,BrData$PrD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$PrD), ref = "No")~ relevel(factor(BrData$symptom_BonePain_br), ref = "Unchecked"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+c <- table(BrData$KP_checkBreast ,BrData$PrD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$PrD), ref = "No")~ relevel(factor(BrData$KP_checkBreast), ref = "No"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+c <- table(BrData$Hist_br ,BrData$PrD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$PrD), ref = "No")~ relevel(factor(BrData$Hist_br), ref = "No"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+#adjusted model
+model <- glm(relevel(factor(BrData$PrD), ref = "No")~ relevel(factor(BrData$Division_cat), ref = "Barisal")
+             + relevel(factor(BrData$residence), ref = "Urban")
+             + relevel(factor(BrData$symptom_breastPain_br), ref = "Unchecked")
+             + relevel(factor(BrData$symptom_nippleDischarge_br), ref = "Unchecked"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+
+require(foreign)
+require(MASS)
+require(pROC)
+require(survey)
+require(ResourceSelection)
+require(ROCR)
+require(car)
+require(ggplot2)
+require(maptools)
+
+#hoslem
+hoslem.test(model$y, fitted(model)) #hosmer and lemeshow goodness of fit  test
+
+#auc value
+# 
+# prob <- predict(model,type="response")
+# pred <- prediction(as.numeric(prob),as.numeric(model$y))
+# perf <- performance(pred, measure = "tpr", x.measure = "fpr") 
+# auc.tmp <- performance(pred,"auc"); auc <- as.numeric(auc.tmp@y.values)
+# auc
+
+library("verification")
+
+# For model without ties
+roc.area(model$y, fitted(model))
+ci.auc(model$y, fitted(model))
+
+#roc curve
+
+# plot(perf, main="ROC Curve ", xlab="specificity",  ylab="sensitivity")
+# grid()
+# abline(0,1, col="blue", lty=2)
+
+D.ex <- model$y
+M.ex <- fitted(model)
+mu1 <- mean(M.ex[D.ex == 1])
+mu0 <- mean(M.ex[D.ex == 0])
+s1 <- sd(M.ex[D.ex == 1])
+s0 <- sd(M.ex[D.ex == 0])
+c.ex <- seq(min(M.ex), max(M.ex), length.out = 300)
+
+binorm.roc <- data.frame(c = c.ex, 
+                         FPF = pnorm((mu0 - c.ex)/s0), 
+                         TPF = pnorm((mu1 - c.ex)/s1)
+)
+library(survivalROC)
+library(plotROC)
+binorm.plot2 <- ggplot(binorm.roc, aes(x = FPF, y = TPF, label = c)) + 
+  geom_roc(stat = "identity") +  
+  ggtitle("ROC Curves (Model 2)") + 
+  annotate("text", x = .75, y = .50, 
+           label = paste("AUC =", round(calc_auc(binorm.plot2)$AUC*(-1)*100, 2),"%")) +
+  #  scale_x_continuous("False positive fraction (1 - Specificity)", breaks = seq(0, 1, by = .1))+
+  #  scale_y_continuous("True positive fraction (Sensitivity)", breaks = seq(0, 1, by = .1)) 
+  style_roc(theme = theme_grey, xlab = "False positive fraction (1 - Specificity)", ylab = "True positive fraction (Sensitivity)")
+binorm.plot2 <- binorm.plot2 + 
+  theme(plot.title = element_text(size = 16,hjust=0.5),
+        legend.title = element_text(size=16),
+        legend.text = element_text(size=16),
+        axis.text = element_text(size = 16),
+        axis.title = element_text(size = 16))
+binorm.plot2
+
+
 #Total_Delay
 BrData$TD <- factor(BrData$TD,levels=c("Yes","No"),labels = c("Yes","No"))
 BrData$TD
@@ -351,6 +817,248 @@ summary(BrData$TD)
 x <- table(BrData$TD)
 x
 round(prop.table(x),4)*100
+
+c <- table(BrData$AgeCat ,BrData$TD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$TD), ref = "No")~ relevel(factor(BrData$AgeCat), ref = ">=60"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+
+c <- table(BrData$Division_cat ,BrData$TD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$TD), ref = "No")~ relevel(factor(BrData$Division_cat), ref = "Barisal"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+c <- table(BrData$residence ,BrData$TD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$TD), ref = "No")~ relevel(factor(BrData$residence), ref = "Urban"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+c <- table(BrData$Marital_status ,BrData$TD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$TD), ref = "No")~ relevel(factor(BrData$Marital_status), ref = "Married"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+c <- table(BrData$Patients_education ,BrData$TD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$TD), ref = "No")~ relevel(factor(BrData$Patients_education), ref = "Secondary/higher"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+c <- table(BrData$Husbands_education ,BrData$TD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$TD), ref = "No")~ relevel(factor(BrData$Husbands_education), ref = "Secondary/higher"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+c <- table(BrData$Family_income ,BrData$TD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$TD), ref = "No")~ relevel(factor(BrData$Family_income), ref = ">20,000"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+c <- table(BrData$PortableElectronicDevices ,BrData$TD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$TD), ref = "No")~ relevel(factor(BrData$PortableElectronicDevices), ref = "Unchecked"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+c <- table(BrData$MassMediaAccess ,BrData$TD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$TD), ref = "No")~ relevel(factor(BrData$MassMediaAccess), ref = "Unchecked"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+c <- table(BrData$symptom_Lump_br ,BrData$TD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$TD), ref = "No")~ relevel(factor(BrData$symptom_Lump_br), ref = "Unchecked"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+
+c <- table(BrData$symptom_breastPain_br ,BrData$TD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$TD), ref = "No")~ relevel(factor(BrData$symptom_breastPain_br), ref = "Unchecked"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+c <- table(BrData$symptom_nippleDischarge_br ,BrData$TD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$TD), ref = "No")~ relevel(factor(BrData$symptom_nippleDischarge_br), ref = "Unchecked"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+c <- table(BrData$symptom_SkinChanges_br ,BrData$TD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$TD), ref = "No")~ relevel(factor(BrData$symptom_SkinChanges_br), ref = "Unchecked"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+c <- table(BrData$symptom_BonePain_br ,BrData$TD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$TD), ref = "No")~ relevel(factor(BrData$symptom_BonePain_br), ref = "Unchecked"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+c <- table(BrData$KP_checkBreast ,BrData$TD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$TD), ref = "No")~ relevel(factor(BrData$KP_checkBreast), ref = "No"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+c <- table(BrData$Hist_br ,BrData$TD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$TD), ref = "No")~ relevel(factor(BrData$Hist_br), ref = "No"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+#adjusted model
+model <- glm(relevel(factor(BrData$TD), ref = "No")~ relevel(factor(BrData$Division_cat), ref = "Barisal")
+             + relevel(factor(BrData$residence), ref = "Urban")
+             + relevel(factor(BrData$Marital_status), ref = "Married")
+             + relevel(factor(BrData$Patients_education), ref = "Secondary/higher")
+             + relevel(factor(BrData$symptom_breastPain_br), ref = "Unchecked")
+             + relevel(factor(BrData$symptom_nippleDischarge_br), ref = "Unchecked"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
+
+require(foreign)
+require(MASS)
+require(pROC)
+require(survey)
+require(ResourceSelection)
+require(ROCR)
+require(car)
+require(ggplot2)
+require(maptools)
+
+#hoslem
+hoslem.test(model$y, fitted(model)) #hosmer and lemeshow goodness of fit  test
+
+#auc value
+# 
+# prob <- predict(model,type="response")
+# pred <- prediction(as.numeric(prob),as.numeric(model$y))
+# perf <- performance(pred, measure = "tpr", x.measure = "fpr") 
+# auc.tmp <- performance(pred,"auc"); auc <- as.numeric(auc.tmp@y.values)
+# auc
+
+library("verification")
+
+# For model without ties
+roc.area(model$y, fitted(model))
+ci.auc(model$y, fitted(model))
+
+#roc curve
+
+# plot(perf, main="ROC Curve ", xlab="specificity",  ylab="sensitivity")
+# grid()
+# abline(0,1, col="blue", lty=2)
+
+D.ex <- model$y
+M.ex <- fitted(model)
+mu1 <- mean(M.ex[D.ex == 1])
+mu0 <- mean(M.ex[D.ex == 0])
+s1 <- sd(M.ex[D.ex == 1])
+s0 <- sd(M.ex[D.ex == 0])
+c.ex <- seq(min(M.ex), max(M.ex), length.out = 300)
+
+binorm.roc <- data.frame(c = c.ex, 
+                         FPF = pnorm((mu0 - c.ex)/s0), 
+                         TPF = pnorm((mu1 - c.ex)/s1)
+)
+library(survivalROC)
+library(plotROC)
+binorm.plot3 <- ggplot(binorm.roc, aes(x = FPF, y = TPF, label = c)) + 
+  geom_roc(stat = "identity") +  
+  ggtitle("ROC Curves (Model 3)") + 
+  annotate("text", x = .75, y = .50, 
+           label = paste("AUC =", round(calc_auc(binorm.plot3)$AUC*(-1)*100, 2),"%")) +
+  #  scale_x_continuous("False positive fraction (1 - Specificity)", breaks = seq(0, 1, by = .1))+
+  #  scale_y_continuous("True positive fraction (Sensitivity)", breaks = seq(0, 1, by = .1)) 
+  style_roc(theme = theme_grey, xlab = "False positive fraction (1 - Specificity)", ylab = "True positive fraction (Sensitivity)")
+binorm.plot3 <- binorm.plot3 + 
+  theme(plot.title = element_text(size = 16,hjust=0.5),
+        legend.title = element_text(size=16),
+        legend.text = element_text(size=16),
+        axis.text = element_text(size = 16),
+        axis.title = element_text(size = 16))
+binorm.plot3
+
+library(gridExtra)
+tiff("ROC.tiff", units="in", width=18, height=10, res=300)
+gridExtra::grid.arrange(binorm.plot1,binorm.plot2,binorm.plot3, nrow=1, ncol=3)
+dev.off()
 
 #Why did not seek attention sooner? Please respond for each of the queries (Yes/No)
 #2.6 Emotional barriers: a.	Because you thought that the problem would disappear by itself? Yes/No 
@@ -587,7 +1295,7 @@ library(ggplot2)
 library("stringr") 
 
 df <- data.frame(Discomfort=c("Breast pain", "Lump", "Arm pain","Itching", "Shape changes", "Skin changes","Ulcer or sore skin", "Nipple discharge"),
-                 Percentage=c(49.86, 43.66, 33.24, 32.39, 29.86, 12.11, 10.99, 11.55))
+                 Percentage=c(52.06, 45.86, 34.81, 33.82, 31.36, 12.72, 11.50, 12.13))
 head(df)
 
 b<-ggplot(data=df, aes(x=Discomfort, y=Percentage)) +
@@ -603,3 +1311,8 @@ b<-ggplot(data=df, aes(x=Discomfort, y=Percentage)) +
         legend.text = element_text(size=15))
 b <- b +scale_x_discrete(labels = function(x) str_wrap(x, width = 10))
 b
+
+library(gridExtra)
+tiff("Discomfort.tiff", units="in", width=10, height=8, res=300)
+gridExtra::grid.arrange(b, nrow=1, ncol=1)
+dev.off()
