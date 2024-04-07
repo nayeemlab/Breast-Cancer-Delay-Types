@@ -18,6 +18,11 @@ library(psychometric)
 setwd('E:\\ResearchProject\\Sorowar Sir\\Breast Cancer')
 BrData <- read.csv("BreastCancerDiagnost_DATA_Raw data.csv")
 
+library(pastecs)
+stat.desc(BrData$PtD_weeks)
+stat.desc(BrData$PrD_weeks)
+stat.desc(BrData$TD_weeks)
+
 #1.	Form Number / Identification Number
 BrData$Record_ID <- factor(BrData$Record.ID)
 
@@ -50,6 +55,8 @@ x <- table(BrData$AgeCat)
 x
 round(prop.table(x),4)*100
 
+describe.by(BrData$PtD_weeks, BrData$AgeCat)
+
 #Division
 BrData$Division <- factor(BrData$Division)
 
@@ -61,6 +68,8 @@ summary(BrData$Division_cat)
 x <- table(BrData$Division_cat)
 x
 round(prop.table(x),4)*100
+
+describe.by(BrData$PtD_weeks, BrData$Division_cat)
 
 #6.	Current place of residence (Home District)
 # BrData$Home_district <- factor(BrData$X4..Home.District..permanent.residence.)
@@ -80,6 +89,7 @@ x <- table(BrData$residence)
 x
 round(prop.table(x),4)*100
 
+describeBy(BrData$PtD_weeks, BrData$residence)
 
 #5.	Current place of residence (Current District)
 BrData$Current_eistrict <- factor(BrData$X6..Current.place.of.residence..district.)
@@ -93,6 +103,8 @@ summary(BrData$Patients_education)
 x <- table(BrData$Patients_education)
 x
 round(prop.table(x),4)*100
+
+describeBy(BrData$PtD_weeks, BrData$residence)
 
 #11.	Marital status (single/widowed/never married/ married)
 BrData$Marital_status <- factor(BrData$X2..Marital.status)
@@ -736,6 +748,17 @@ model <- glm(relevel(factor(BrData$PrD), ref = "No")~ relevel(factor(BrData$Hist
 summary(model)
 exp(cbind(coef(model), confint(model)))
 
+
+c <- table(BrData$pathos_cancerStage ,BrData$PrD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$PrD), ref = "No")~ relevel(factor(BrData$pathos_cancerStage), ref = "Stage I"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
 #adjusted model
 model <- glm(relevel(factor(BrData$PrD), ref = "No")~ relevel(factor(BrData$Division_cat), ref = "Barisal")
              + relevel(factor(BrData$residence), ref = "Urban")
@@ -773,7 +796,7 @@ library("verification")
 roc.area(model$y, fitted(model))
 ci.auc(model$y, fitted(model))
 
-#roc curve
+# roc curve
 
 # plot(perf, main="ROC Curve ", xlab="specificity",  ylab="sensitivity")
 # grid()
@@ -980,13 +1003,29 @@ model <- glm(relevel(factor(BrData$TD), ref = "No")~ relevel(factor(BrData$Hist_
 summary(model)
 exp(cbind(coef(model), confint(model)))
 
+
+
+c <- table(BrData$pathos_cancerStage ,BrData$TD)
+c
+round(prop.table(c,1)*100,2)
+summary(c)
+
+model <- glm(relevel(factor(BrData$TD), ref = "No")~ relevel(factor(BrData$pathos_cancerStage), ref = "Stage I"),
+             family=binomial(link='logit'),data=BrData)
+summary(model)
+exp(cbind(coef(model), confint(model)))
+
 #adjusted model
 model <- glm(relevel(factor(BrData$TD), ref = "No")~ relevel(factor(BrData$Division_cat), ref = "Barisal")
              + relevel(factor(BrData$residence), ref = "Urban")
              + relevel(factor(BrData$Marital_status), ref = "Married")
              + relevel(factor(BrData$Patients_education), ref = "Secondary/higher")
+             + relevel(factor(BrData$Family_income), ref = ">20,000")
+             + relevel(factor(BrData$PortableElectronicDevices), ref = "Unchecked")
+             + relevel(factor(BrData$MassMediaAccess), ref = "Unchecked")
              + relevel(factor(BrData$symptom_breastPain_br), ref = "Unchecked")
-             + relevel(factor(BrData$symptom_nippleDischarge_br), ref = "Unchecked"),
+             + relevel(factor(BrData$symptom_nippleDischarge_br), ref = "Unchecked")
+             + relevel(factor(BrData$symptom_BonePain_br), ref = "Unchecked"),
              family=binomial(link='logit'),data=BrData)
 summary(model)
 exp(cbind(coef(model), confint(model)))
@@ -1071,20 +1110,11 @@ x <- table(BrData$Emotional_barriers_disappearItself)
 x
 round(prop.table(x),4)*100
 
-c <- table(BrData$AgeCat ,BrData$Emotional_barriers_disappearItself)
+c <- table(BrData$Hist_br ,BrData$Emotional_barriers_disappearItself)
 c
 round(prop.table(c,2)*100,2)
 summary(c)
-
-c <- table(BrData$residence ,BrData$Emotional_barriers_disappearItself)
-c
-round(prop.table(c,2)*100,2)
-summary(c)
-
-c <- table(BrData$Marital_status ,BrData$Emotional_barriers_disappearItself)
-c
-round(prop.table(c,2)*100,2)
-summary(c)
+fisher.test(c)
 
 #2.6 Emotional barriers: b.	Fear/ too scared?(Yes/No)
 BrData$Emotional_barriers_scared <- factor(BrData$b..Fear..too.scared.)
@@ -1097,6 +1127,12 @@ x
 round(prop.table(x),4)*100
 
 
+c <- table(BrData$Hist_br ,BrData$Emotional_barriers_scared)
+c
+round(prop.table(c,2)*100,2)
+summary(c)
+fisher.test(c)
+
 #2.6 Emotional barriers: c.	Too embarrassed(Yes/No)
 BrData$Emotional_barriers_embarrassed <- factor(BrData$c..Too.embarrassed.)
 summary(BrData$Emotional_barriers_embarrassed)
@@ -1106,6 +1142,12 @@ summary(BrData$Emotional_barriers_embarrassed)
 x <- table(BrData$Emotional_barriers_embarrassed)
 x
 round(prop.table(x),4)*100
+
+c <- table(BrData$Hist_br ,BrData$Emotional_barriers_embarrassed)
+c
+round(prop.table(c,2)*100,2)
+summary(c)
+fisher.test(c)
 
 #2.6 Emotional barriers: d.	Negligence or carelessness?(Yes/No)
 BrData$Emotional_barriers_negligence <- factor(BrData$d..Negligence.or.carelessness.)
@@ -1117,6 +1159,12 @@ x <- table(BrData$Emotional_barriers_negligence)
 x
 round(prop.table(x),4)*100
 
+c <- table(BrData$Hist_br ,BrData$Emotional_barriers_negligence)
+c
+round(prop.table(c,2)*100,2)
+summary(c)
+fisher.test(c)
+
 #2.6 Practical barriers: e.	h.	Because I had to take care of the family (children, elderly or sick)?(Yes/No)
 BrData$Practical_barriers_Carefamily <- factor(BrData$e..Because.I.had.to.take.care.of.the.family..children..elderly.or.sick..)
 summary(BrData$Practical_barriers_Carefamily)
@@ -1127,6 +1175,11 @@ x <- table(BrData$Practical_barriers_Carefamily)
 x
 round(prop.table(x),4)*100
 
+c <- table(BrData$Hist_br ,BrData$Practical_barriers_Carefamily)
+c
+round(prop.table(c,2)*100,2)
+summary(c)
+fisher.test(c)
 
 #2.6 Practical barriers: g.	Too busy?(Yes/No)
 BrData$Practical_barriers_toobusy <- factor(BrData$f..Too.busy.)
@@ -1138,6 +1191,11 @@ x <- table(BrData$Practical_barriers_toobusy)
 x
 round(prop.table(x),4)*100
 
+c <- table(BrData$Hist_br ,BrData$Practical_barriers_toobusy)
+c
+round(prop.table(c,2)*100,2)
+summary(c)
+fisher.test(c)
 
 #2.6 Practical barriers: f.	Lack of money to use health services? (Yes/No)
 BrData$Practical_barriers_lackMoney <- factor(BrData$g..Lack.of.money.to.use.health.services.)
@@ -1149,6 +1207,12 @@ x <- table(BrData$Practical_barriers_lackMoney)
 x
 round(prop.table(x),4)*100
 
+c <- table(BrData$Hist_br ,BrData$Practical_barriers_lackMoney)
+c
+round(prop.table(c,2)*100,2)
+summary(c)
+fisher.test(c)
+
 #2.6 Health-Service barriers: k.	Difficult to arrange transport?(Yes/No)
 BrData$Practical_barriers_transportDifficulties <- factor(BrData$h..Difficult.to.arrange.transport.)
 summary(BrData$Practical_barriers_transportDifficulties)
@@ -1158,6 +1222,12 @@ summary(BrData$Practical_barriers_transportDifficulties)
 x <- table(BrData$Practical_barriers_transportDifficulties)
 x
 round(prop.table(x),4)*100
+
+c <- table(BrData$Hist_br ,BrData$Practical_barriers_transportDifficulties)
+c
+round(prop.table(c,2)*100,2)
+summary(c)
+fisher.test(c)
 
 #2.6 Health-Service barriers: i.	Because I did not know where should I go?
 BrData$Practical_barriers_wheretoGo <- factor(BrData$i..Because.I.did.not.know.where.should.I.go)
@@ -1169,6 +1239,14 @@ x <- table(BrData$Practical_barriers_wheretoGo)
 x
 round(prop.table(x),4)*100
 
+
+c <- table(BrData$Hist_br ,BrData$Practical_barriers_wheretoGo)
+c
+round(prop.table(c,2)*100,2)
+summary(c)
+fisher.test(c)
+
+
 #2.6 Health-Service barriers: j.	Difficult to make appointment?(Yes/No)
 BrData$Practical_barriers_appoinmentDifficulties <- factor(BrData$j..Difficult.to.make.appointment.)
 summary(BrData$Practical_barriers_appoinmentDifficulties)
@@ -1179,6 +1257,12 @@ x <- table(BrData$Practical_barriers_appoinmentDifficulties)
 x
 round(prop.table(x),4)*100
 
+c <- table(BrData$Hist_br ,BrData$Practical_barriers_appoinmentDifficulties)
+c
+round(prop.table(c,2)*100,2)
+summary(c)
+fisher.test(c)
+
 #2.6 Health-Service barriers: l.	For some other reason? _____________
 BrData$barriers_others <- factor(BrData$K..For.some.other.reason.)
 summary(BrData$barriers_others)
@@ -1188,6 +1272,13 @@ summary(BrData$barriers_others)
 x <- table(BrData$barriers_others)
 x
 round(prop.table(x),4)*100
+
+
+c <- table(BrData$Hist_br ,BrData$barriers_others)
+c
+round(prop.table(c,2)*100,2)
+summary(c)
+fisher.test(c)
 
 #2.6 Health-Service barriers: l.	For some other reason? specify
 BrData$barriers_othersSpecify <- factor(BrData$If.other..please.specify)
@@ -1286,6 +1377,19 @@ x <- table(BrData$pathos_cancerStage)
 x
 round(prop.table(x),4)*100
 
+describeBy(BrData$PtD_weeks, BrData$pathos_cancerStage)
+stat.desc(BrData$PtD_weeks)
+kruskal.test(PtD_weeks ~ pathos_cancerStage,BrData)
+
+
+describeBy(BrData$PrD_weeks, BrData$pathos_cancerStage)
+stat.desc(BrData$PrD_weeks)
+kruskal.test(PrD_weeks ~ pathos_cancerStage,BrData)
+
+describeBy(BrData$TD_weeks, BrData$pathos_cancerStage)
+stat.desc(BrData$PtD_weeks)
+kruskal.test(TD_weeks ~ pathos_cancerStage,BrData)
+
 #Tumer Size
 BrData$pathos_tumerSize <- factor(BrData$Size.of.tumor..cm.)
 
@@ -1311,8 +1415,70 @@ b<-ggplot(data=df, aes(x=Discomfort, y=Percentage)) +
         legend.text = element_text(size=15))
 b <- b +scale_x_discrete(labels = function(x) str_wrap(x, width = 10))
 b
-
 library(gridExtra)
 tiff("Discomfort.tiff", units="in", width=10, height=8, res=300)
 gridExtra::grid.arrange(b, nrow=1, ncol=1)
 dev.off()
+
+
+c <- table(BrData$pathos_cancerStage ,BrData$PtD)
+c
+round(prop.table(c,2)*100,2)
+
+c <- table(BrData$pathos_cancerStage ,BrData$PrD)
+c
+round(prop.table(c,2)*100,2)
+
+c <- table(BrData$pathos_cancerStage ,BrData$TD)
+c
+round(prop.table(c,2)*100,2)
+
+
+library(ggplot2)
+library(tibble)
+library(scales)
+library(ggrepel)
+library(forcats)
+
+df = data.frame(type = c(" Patient Delay"," Patient Delay"," Patient Delay"," Patient Delay",
+                         " Provider Delay"," Provider Delay"," Provider Delay"," Provider Delay",
+                         "Diagnosis Delay","Diagnosis Delay","Diagnosis Delay","Diagnosis Delay"), 
+                Stages = c("Stage I","Stage II","Stage III","Stage IV",
+                              "Stage I","Stage II","Stage III","Stage IV",
+                              "Stage I","Stage II","Stage III","Stage IV"), 
+                value = c(2.02, 44.45, 51.53, 2.01,
+                          2.48, 52.75, 41.79, 2.99, 
+                          1.43, 48.57, 47.86, 2.14))
+
+
+library(ggplot2)
+SAC <- ggplot(df, aes(x = factor(1), y = -value, fill = Stages)) + 
+  geom_bar(color = "black", stat = "identity") +
+  geom_text(aes(x=1.55, label=paste0(round(value), "%")),cex=2.1,
+            position = position_stack(vjust=0.5)) +
+  scale_x_discrete(NULL, expand = c(0,0)) +
+  scale_y_continuous(NULL, expand = c(0,0)) + 
+  coord_polar(theta = "y") +
+  facet_wrap(~type) +
+  theme_void()+ theme_bw()+
+  xlab(" ") + ylab("") + ggtitle("")+
+  theme(        legend.position= "bottom",
+                plot.title = element_text(size = 15,hjust=0.5),
+                legend.title = element_text(size=15),
+                legend.text = element_text(size=15),
+                axis.title.x=element_blank(),
+                axis.text.x=element_blank(),
+                axis.ticks.x=element_blank(),
+                axis.title.y=element_blank(),
+                axis.text.y=element_blank(),
+                axis.ticks.y=element_blank()
+                
+  )
+SAC
+
+library(gridExtra)
+tiff("Stages.tiff", units="in", width=8, height=4, res=300)
+gridExtra::grid.arrange(SAC)
+dev.off()
+
+
