@@ -19,9 +19,9 @@ setwd('E:\\ResearchProject\\Sorowar Sir\\Breast Cancer')
 BrData <- read.csv("BreastCancerDiagnost_DATA_Raw data.csv")
 
 library(pastecs)
-stat.desc(BrData$PtD_weeks)
-stat.desc(BrData$PrD_weeks)
-stat.desc(BrData$TD_weeks)
+stat.desc(BrData$PtD_months)
+stat.desc(BrData$PrD_months)
+stat.desc(BrData$TD_months)
 
 #1.	Form Number / Identification Number
 BrData$Record_ID <- factor(BrData$Record.ID)
@@ -1377,18 +1377,18 @@ x <- table(BrData$pathos_cancerStage)
 x
 round(prop.table(x),4)*100
 
-describeBy(BrData$PtD_weeks, BrData$pathos_cancerStage)
-stat.desc(BrData$PtD_weeks)
-kruskal.test(PtD_weeks ~ pathos_cancerStage,BrData)
+describeBy(BrData$PtD_months, BrData$pathos_cancerStage)
+stat.desc(BrData$PtD_months)
+kruskal.test(PtD_months ~ pathos_cancerStage,BrData)
 
 
-describeBy(BrData$PrD_weeks, BrData$pathos_cancerStage)
-stat.desc(BrData$PrD_weeks)
-kruskal.test(PrD_weeks ~ pathos_cancerStage,BrData)
+describeBy(BrData$PrD_months, BrData$pathos_cancerStage)
+stat.desc(BrData$PrD_months)
+kruskal.test(PrD_months ~ pathos_cancerStage,BrData)
 
-describeBy(BrData$TD_weeks, BrData$pathos_cancerStage)
-stat.desc(BrData$PtD_weeks)
-kruskal.test(TD_weeks ~ pathos_cancerStage,BrData)
+describeBy(BrData$TD_months, BrData$pathos_cancerStage)
+stat.desc(BrData$TD_months)
+kruskal.test(TD_months ~ pathos_cancerStage,BrData)
 
 #Tumer Size
 BrData$pathos_tumerSize <- factor(BrData$Size.of.tumor..cm.)
